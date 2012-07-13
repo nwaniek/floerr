@@ -26,3 +26,6 @@ If the left-file contains no flow, but the right-file does, ai is marked
 with -1e9. However, the mean error and z are not increased!
 
 This behavious might change in the future.
+
+
+The file readErr.m contains a matlab function to load .ERR files.
