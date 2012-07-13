@@ -1,0 +1,28 @@
+Calculate the difference (or error if you have ground truth optical flow
+at hand) between two optical flow estimates:
+
+	floerr left-file right-file output-file
+
+The input files may either be in the Middleburry .FLO format or the UUlm
+.FLOW format (a simple extension to .FLO with a third band of
+information per vector, namely the confidence).
+
+The results are written to .ERR files, which are of the format:
+	FERRwhmza0a1...an
+where FERR is a header string tag, w and h are the width and height,
+respectively. m is the mean difference/error, z is the number of values
+used during computation of m and a1 to an are the per-position errors.
+Storage of a1...an is in row-order. Thus, to get the error at pixel
+position (x, y) you need get the (x + y * w)-th a.
+
+Note that the calculation of m contains a possible pitfall:
+
+If the left-file contains flow at a position x,y, corresponding to the
+i-then entry of the a vector (->ai) but the right-file does not, the
+mean error is increase by PI as this is the maximally possible error. In
+addition ai is set to 1e9.
+
+If the left-file contains no flow, but the right-file does, ai is marked
+with -1e9. However, the mean error and z are not increased!
+
+This behavious might change in the future.
