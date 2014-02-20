@@ -195,7 +195,7 @@ cmp(char *l, char *r, char *o)
 
 	int i = 0;
 	int n = 0;
-	int z = 0;
+	// int z = 0;
 	a_err = calloc(left->w * left->h, sizeof(float));
 	for (int y = 0; y < left->h; y++) {
 		for (int x = 0; x < left->w; x++, i++) {
@@ -211,13 +211,13 @@ cmp(char *l, char *r, char *o)
 
 			// both vectors have zero norm -> no vector ->
 			// everything ok, keep going
-			if (normL == 0.0 && normR == 0.0) {
+			if (normL == 0.0f && normR == 0.0f) {
 				n++;
 			}
 			// left vector is zero, but right indicates
 			// something -> mark in the output data with
 			// -1e9
-			else if (normL == 0.0) {
+			else if (normL == 0.0f) {
 				a_err[i] = (float)-1e9;
 
 				a_mean += M_PI;
@@ -226,7 +226,7 @@ cmp(char *l, char *r, char *o)
 			// right vector is zero, but left indicates
 			// something -> mark in the output data with
 			// 1e9
-			else if (normR == 0.0) {
+			else if (normR == 0.0f) {
 				a_err[i] = (float)1e9;
 
 				a_mean += M_PI;
